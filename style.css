@@ -54,6 +54,9 @@ p {
 
 /* messages */
 /* Chat message bubbles */
+
+/* Chat message bubbles with animation */
+
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
@@ -62,6 +65,60 @@ p {
   max-width: 70%;
   word-break: break-word;
   display: inline-block;
+}
+
+.msg.user.new {
+  opacity: 0;
+  animation-name: slideInRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.msg.ai.new {
+  opacity: 0;
+  animation-name: slideInLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.msg.user {
+  background: linear-gradient(90deg, #e3a535 60%, #ffd580 100%);
+  color: #000000;
+  align-self: flex-end;
+  float: right;
+  margin-right: 8px;
+  border-bottom-right-radius: 4px;
+}
+
+.msg.ai {
+  background: #f2f2f2;
+  color: #333333;
+  align-self: flex-start;
+  float: left;
+  margin-left: 8px;
+  border-bottom-left-radius: 4px;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .msg.user {

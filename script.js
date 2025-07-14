@@ -38,8 +38,16 @@ chatForm.addEventListener("submit", async (e) => {
   // Add user message to conversation history
   conversation.push({ role: "user", content: userMessage });
 
-  // Display user's latest question above the response
-  chatWindow.innerHTML += `<div class="msg user"><strong>You asked:</strong> ${userMessage}</div>`;
+  // Remove 'new' class from previous bubbles
+  const oldNewMsgs = chatWindow.querySelectorAll(".msg.new");
+  oldNewMsgs.forEach((el) => el.classList.remove("new"));
+
+  // Display user's latest question above the response with 'new' class
+  chatWindow.innerHTML += `<div class="msg user new"><strong>You asked:</strong> ${userMessage}</div>`;
+
+  // Disable input and button
+  userInput.disabled = true;
+  document.getElementById("sendBtn").disabled = true;
 
   // Call your Cloudflare Worker API
   const response = await fetch("https://sparky.imorfin2.workers.dev/", {
@@ -54,12 +62,23 @@ chatForm.addEventListener("submit", async (e) => {
   // Add AI reply to conversation history
   conversation.push({ role: "assistant", content: aiReply });
 
-  // Show AI's reply in chat window as a distinct bubble
-  chatWindow.innerHTML += `<div class="msg ai"><strong>Assistant:</strong> ${aiReply}</div>`;
+  // Remove 'new' class from previous bubbles
+  const oldNewMsgs2 = chatWindow.querySelectorAll(".msg.new");
+  oldNewMsgs2.forEach((el) => el.classList.remove("new"));
 
-  // Scroll to bottom for new messages
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+  // Show AI's reply in chat window as a distinct bubble with 'new' class
+  chatWindow.innerHTML += `<div class="msg ai new"><strong>Assistant:</strong> ${aiReply}</div>`;
+
+  // Scroll to bottom for new messages (with a slight delay)
+  setTimeout(() => {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }, 50);
 
   // Clear input
   userInput.value = "";
+
+  // Re-enable input and button after response
+  userInput.disabled = false;
+  document.getElementById("sendBtn").disabled = false;
+  userInput.focus();
 });
