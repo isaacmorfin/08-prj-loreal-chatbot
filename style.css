@@ -8,9 +8,14 @@
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: #ff0000;
   display: flex;
   justify-content: center;
+  background-color: #000000;
+}
+h1,
+p {
+  font-weight: bold;
 }
 
 .page-wrapper {
@@ -42,22 +47,44 @@ body {
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: #ffffff;
   white-space: pre-line;
+  color: black;
 }
 
 /* messages */
+/* Chat message bubbles */
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
+  padding: 12px 18px;
+  border-radius: 18px;
+  max-width: 70%;
+  word-break: break-word;
+  display: inline-block;
 }
 
 .msg.user {
-  color: #000;
+  background: linear-gradient(90deg, #e3a535 60%, #ffd580 100%);
+  color: #000000;
+  align-self: flex-end;
+  float: right;
+  margin-right: 8px;
+  border-bottom-right-radius: 4px;
 }
 
 .msg.ai {
-  color: #666666;
+  background: #f2f2f2;
+  color: #333333;
+  align-self: flex-start;
+  float: left;
+  margin-left: 8px;
+  border-bottom-left-radius: 4px;
+}
+
+/* Clear floats after each message */
+.chat-window .msg {
+  clear: both;
 }
 
 /* input row */
@@ -81,8 +108,8 @@ body {
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
   border: none;
   padding: 12px;
   width: 48px;
@@ -99,7 +126,7 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #000000;
 }
 
 .chat-form button:focus {
@@ -140,4 +167,12 @@ body {
 
 .site-footer a:hover {
   color: #666666;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: #e3a535;
+  padding: 20px;
 }
